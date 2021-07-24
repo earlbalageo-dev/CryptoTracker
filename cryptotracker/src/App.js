@@ -2,18 +2,21 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
-import CinScreen from './components/CoinScreen';
-import { CoinProvider } from './CoinContext';
+import Favourite from './components/Favourite';
 import CoinScreen from './components/CoinScreen';
+import { FaveCoinsProvider } from './context/FaveCoinsContext';
+
 function App() {
   return (
-    <CoinProvider>
-      <Header />
-      <Router>
+    <Router>
+      <FaveCoinsProvider>
+        <Header />
+
         <Route path='/' component={Main} exact />
         <Route path='/coin/:id' component={CoinScreen} />
-      </Router>
-    </CoinProvider>
+        <Route path='/favourite' component={Favourite} />
+      </FaveCoinsProvider>
+    </Router>
   );
 }
 

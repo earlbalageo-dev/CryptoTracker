@@ -1,3 +1,26 @@
 body {
-  background-color: #343a40;
+  background-color: black;
+}
+.coinName {
+  text-transform: capitalize;
+}
+
+tr {
+  cursor: pointer;
+}
+
+/* Hero */
+.hero {
+  border-bottom: #ffffff80 solid;
+}
+.heroStats {
+  display: flex;
+  flex-direction: column;
+}
+.heroStatsTitle {
+  color: #ffffff80;
+}
+.heroStatsValue {
+  display: flex;
+  flex-direction: row;
 }
