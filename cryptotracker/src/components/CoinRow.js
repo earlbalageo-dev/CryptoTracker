@@ -1,39 +1,56 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import { FaveContext } from '../context/FaveCoinsContext';
 import PriceChange from './PriceChange';
 
 const CoinRow = ({ coin }) => {
   const [faveCoins, setFaveCoin] = useContext(FaveContext);
-  const addToFaveHandler = () => {
-    console.log('added to fave');
-    setFaveCoin((prevFaveCoin) => [...prevFaveCoin, coin]);
-    //add to Local Storage
-    localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
+  const [isFave, setIsFave] = useState(false);
+
+  const toggleFaveHandler = () => {
+    //e.preventDefault();
+    if (!isFave) {
+      setFaveCoin((prevFaveCoins) => [...prevFaveCoins, coin.id]);
+      //localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
+      setIsFave(true);
+    } else {
+      setFaveCoin(faveCoins.filter((item) => item !== coin.id));
+      //localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
+      setIsFave(false);
+    }
   };
-  const goToCoin = () => {
-    console.log('going to coin');
-    console.log(faveCoins);
-  };
+
   return (
     <tr>
-      <td onClick={goToCoin}>{coin.market_cap_rank}</td>
-      <td onClick={goToCoin}>
-        <img style={{ width: '20px' }} src={coin.image} />
-        <span className='coinName'>{coin.id}</span> {'\u2022'}{' '}
-        {coin.symbol.toUpperCase()}
-      </td>
-      <td onClick={goToCoin}>
-        <PriceChange price={coin.price_change_percentage_24h} />
-      </td>
-      <td onClick={goToCoin}>
-        {coin.current_price.toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-        })}
-      </td>
-      <td onClick={addToFaveHandler}>
-        {faveCoins.includes(coin) ? (
+      <LinkContainer to={`/coin/${coin.id}`}>
+        <td>{coin.market_cap_rank}</td>
+      </LinkContainer>
+
+      <LinkContainer to={`/coin/${coin.id}`}>
+        <td>
+          <img style={{ width: '20px' }} src={coin.image} alt={coin.id} />
+          <span className='coinName'>{coin.id}</span> {'\u2022'}{' '}
+          {coin.symbol.toUpperCase()}
+        </td>
+      </LinkContainer>
+
+      <LinkContainer to={`/coin/${coin.id}`}>
+        <td>
+          <PriceChange price={coin.price_change_percentage_24h} />
+        </td>
+      </LinkContainer>
+
+      <LinkContainer to={`/coin/${coin.id}`}>
+        <td>
+          {coin.current_price.toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          })}
+        </td>
+      </LinkContainer>
+
+      <td onClick={toggleFaveHandler}>
+        {isFave ? (
           <i style={{ color: 'yellow' }} className='fas fa-star'></i>
         ) : (
           <i className='far fa-star'></i>

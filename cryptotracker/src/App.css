@@ -1,5 +1,12 @@
 body {
   background-color: black;
+  color: white;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: #ff9332;
 }
 .coinName {
   text-transform: capitalize;
@@ -13,14 +20,20 @@ tr {
 .hero {
   border-bottom: #ffffff80 solid;
 }
-.heroStats {
+.coinStats {
   display: flex;
   flex-direction: column;
 }
-.heroStatsTitle {
+.coinStatsTitle {
   color: #ffffff80;
 }
-.heroStatsValue {
+.coinStatsValue {
   display: flex;
   flex-direction: row;
+}
+
+/* COINSCREEN */
+.socialButton:hover {
+  color: black;
+  background-color: #ff9332;
 }

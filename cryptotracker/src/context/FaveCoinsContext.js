@@ -3,9 +3,10 @@ import React, { useState, useEffect, createContext } from 'react';
 export const FaveContext = createContext();
 
 export const FaveCoinsProvider = (props) => {
-  const initialState = localStorage.getItem('faveCoins')
-    ? JSON.parse(localStorage.getItem('faveCoins'))
-    : [];
+  const initialState = [];
+  // localStorage.getItem('faveCoins')
+  //   ? JSON.parse(localStorage.getItem('faveCoins'))
+  //   : [];
   const [faveCoins, setFaveCoin] = useState(initialState);
   useEffect(() => {}, []);
   return (
