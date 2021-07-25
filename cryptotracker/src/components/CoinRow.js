@@ -9,22 +9,21 @@ const CoinRow = ({ coin }) => {
   const [isFave, setIsFave] = useState(false);
 
   const toggleFaveHandler = () => {
-    //e.preventDefault();
     if (!isFave) {
       setFaveCoin((prevFaveCoins) => [...prevFaveCoins, coin]);
       //localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
       setIsFave(true);
     } else {
-      setFaveCoin(faveCoins.filter((item) => item !== coin.id));
+      setFaveCoin(faveCoins.filter((x) => x.id !== coin.id));
       //localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
       setIsFave(false);
     }
   };
   useEffect(() => {
-    if (faveCoins.includes(coin)) {
+    if (faveCoins.filter((e) => e.id === coin.id).length > 0) {
       setIsFave(true);
     }
-  });
+  }, [isFave]);
 
   return (
     <tr>
