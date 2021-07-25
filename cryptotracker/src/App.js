@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Favourite from './components/Favourite';
@@ -12,8 +12,7 @@ function App() {
       <LoadingProvider>
         <FaveCoinsProvider>
           <Header />
-
-          <Route path='/' component={Main} exact />
+          <Route exact path='/' component={Main} />
           <Route path='/coin/:id' component={CoinScreen} />
           <Route path='/favourite' component={Favourite} />
         </FaveCoinsProvider>
