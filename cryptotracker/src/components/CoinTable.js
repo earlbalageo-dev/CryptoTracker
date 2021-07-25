@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Table } from 'react-bootstrap';
 import CoinRow from './CoinRow';
-import axios from 'axios';
-const CoinTable = () => {
-  const [coins, setCoins] = useState([]);
-
-  const getAllCoins = async () => {
-    const { data } = await axios.get(
-      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=false'
-    );
-    setCoins(data);
-  };
-
-  useEffect(() => {
-    getAllCoins();
-  }, []);
-
+//import axios from 'axios';
+const CoinTable = ({ coins }) => {
   return (
     <Table striped responsive borderless hover variant='dark'>
       <thead>

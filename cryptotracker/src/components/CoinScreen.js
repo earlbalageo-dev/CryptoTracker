@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import React, { useEffect, useState, useContext } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { LoadingContext } from '../context/LoadingContext';
 import axios from 'axios';
 import CoinStat from './CoinStat';
 import SocialButton from './SocialButton';
+import Loader from './Loader';
 
 const CoinScreen = ({ match }) => {
   const [coinInfo, setCoinInfo] = useState({});
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useContext(LoadingContext);
+  const [isFave, setIsFave] = useState(false);
+
   const coinId = match.params.id;
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`https://api.coingecko.com/api/v3/coins/${coinId}`)
       .then((response) => {
         setCoinInfo(response.data);
-        setLoading(false);
       });
-  }, [coinId]);
+    setLoading(false);
+  });
 
-  if (isLoading) {
-    return <div>LOADING....</div>;
+  const faveHandler = () => {
+    //e.preventDefault();
+    if (!isFave) {
+      setIsFave(true);
+    } else {
+      setIsFave(false);
+    }
+  };
+
+  if (isLoading || Object.keys(coinInfo).length === 0) {
+    return <Loader />;
   }
 
   return (
@@ -47,11 +61,12 @@ const CoinScreen = ({ match }) => {
                 >
                   #{coinInfo.market_cap_rank}
                 </sup>
-                <sup>
-                  <i
-                    style={{ color: 'yellow' }}
-                    className='fas fa-star px-2 fa-fx'
-                  ></i>
+                <sup onClick={faveHandler}>
+                  {isFave ? (
+                    <i style={{ color: 'yellow' }} className='fas fa-star'></i>
+                  ) : (
+                    <i className='far fa-star'></i>
+                  )}
                 </sup>
               </h1>
             </div>

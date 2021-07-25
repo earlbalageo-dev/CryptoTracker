@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+
 import { LinkContainer } from 'react-router-bootstrap';
 import { FaveContext } from '../context/FaveCoinsContext';
 import PriceChange from './PriceChange';
@@ -10,7 +11,7 @@ const CoinRow = ({ coin }) => {
   const toggleFaveHandler = () => {
     //e.preventDefault();
     if (!isFave) {
-      setFaveCoin((prevFaveCoins) => [...prevFaveCoins, coin.id]);
+      setFaveCoin((prevFaveCoins) => [...prevFaveCoins, coin]);
       //localStorage.setItem('faveCoins', JSON.stringify(faveCoins));
       setIsFave(true);
     } else {
@@ -19,6 +20,11 @@ const CoinRow = ({ coin }) => {
       setIsFave(false);
     }
   };
+  useEffect(() => {
+    if (faveCoins.includes(coin)) {
+      setIsFave(true);
+    }
+  });
 
   return (
     <tr>

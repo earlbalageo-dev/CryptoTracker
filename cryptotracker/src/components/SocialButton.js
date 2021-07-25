@@ -4,7 +4,7 @@ const SocialButton = ({ name, icon }) => {
   return (
     <div>
       <Button className='socialButton' variant='dark'>
-        <i class={icon}>{name}</i>
+        <i className={icon}>{name}</i>
       </Button>
     </div>
   );
