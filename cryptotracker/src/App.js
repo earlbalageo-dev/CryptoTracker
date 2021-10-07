@@ -6,16 +6,19 @@ import Favourite from './components/Favourite';
 import CoinScreen from './components/CoinScreen';
 import { FaveCoinsProvider } from './context/FaveCoinsContext';
 import { LoadingProvider } from './context/LoadingContext';
+import { FilterProvider } from './context/FilterContext';
 function App() {
   return (
     <Router>
       <LoadingProvider>
-        <FaveCoinsProvider>
-          <Header />
-          <Route exact path='/' component={Main} />
-          <Route path='/coin/:id' component={CoinScreen} />
-          <Route path='/favourite' component={Favourite} />
-        </FaveCoinsProvider>
+        <FilterProvider>
+          <FaveCoinsProvider>
+            <Header />
+            <Route exact path='/' component={Main} />
+            <Route path='/coin/:id' component={CoinScreen} />
+            <Route path='/favourite' component={Favourite} />
+          </FaveCoinsProvider>
+        </FilterProvider>
       </LoadingProvider>
     </Router>
   );
