@@ -37,3 +37,8 @@ tr {
   color: black;
   background-color: #ff9332;
 }
+
+.coinInfo a {
+  color: #ff9332;
+  text-decoration: underline;
+}

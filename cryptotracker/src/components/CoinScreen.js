@@ -101,7 +101,7 @@ const CoinScreen = ({ match }) => {
             </div>
             <Row className='coinStatsValue'>
               <Col>
-                <a href='www.asd.com'>www.botcoin.com</a>
+                <a href='www.asd.com'>{coinInfo.name}</a>
               </Col>
               <Col>
                 <SocialButton name='Reddit' icon='fab fa-reddit' />
@@ -121,7 +121,11 @@ const CoinScreen = ({ match }) => {
       </Row>
       <Row className='py-5'>
         <h4>About</h4>
-        <p>{coinInfo.description.en}</p>
+        {/* <p>{coinInfo.description.en}</p> */}
+        <div
+          className='coinInfo'
+          dangerouslySetInnerHTML={{ __html: coinInfo.description.en }}
+        />
       </Row>
     </Container>
   );
